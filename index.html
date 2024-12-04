@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Kenangan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">XII TKJ 1</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#gallery">Galeri</a></li>
+                <li><a href="#video">Video</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Kenangan yang Abadi</h1>
+        <p>Temukan momen indah yang tersimpan selamanya.</p>
+        <p>Momen yang indah bersama teman dan guru kami ibu Nurul Fadillah</p>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <h2>Galeri Foto</h2>
+        <div class="gallery-grid">
+            <img src="img/1.JPG" alt="Foto 1">
+            <img src="img/2.JPG" alt="Foto 2">
+            <img src="img/3.JPG" alt="Foto 3">
+            <img src="img/4.JPG" alt="Foto 4">
+        </div>
+    </section>
+    
+    <div class="filter-buttons">
+    <button data-filter="all" class="active">Semua</button>
+    <button data-filter="kenangan">Di Gor</button>
+    <button data-filter="perjalanan">Hari Guru</button>
+</div>
+
+<div class="gallery-grid">
+    <img src="img/5.JPG" alt="Kenangan" class="filter-item kenangan">
+    <img src="img/6.JPG" alt="Perjalanan" class="filter-item perjalanan">
+    <img src="img/7.JPG" alt="Kenangan" class="filter-item kenangan">
+    <img src="img/8.JPG" alt="Perjalanan" class="filter-item perjalanan">
+</div>
+
+    <section id="video" class="video-section">
+        <h2>Galeri Video</h2>
+        <video controls>
+            <source src="img/vid.mp4" type="video/mp4">
+            Browser Anda tidak mendukung video.
+        </video>
+    </section>
+    
+    <div class="video-carousel">
+    <button class="prev-btn">&lt;</button>
+    <div class="carousel">
+        <video controls>
+            <source src="img/vid2.mp4" type="video/mp4">
+        </video>
+        <video controls>
+            <source src="img/vid3.mp4" type="video/mp4">
+        </video>
+    </div>
+    <button class="next-btn">&gt;</button>
+</div>
+
+    <footer>
+        <p>&copy; 2024 Galeri XII TKJ 1. Semua Hak Dilindungi.</p>
+    </footer>
+
+<script>
+    const filterButtons = document.querySelectorAll('.filter-buttons button');
+    const filterItems = document.querySelectorAll('.filter-item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            filterItems.forEach(item => {
+                if (filter === 'all' || item.classList.contains(filter)) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+    });
+</script>
+<script>
+    const carousel = document.querySelector('.video-carousel .carousel');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    let scrollPosition = 0;
+
+    prevBtn.addEventListener('click', () => {
+        scrollPosition -= 320; // Adjust based on video width
+        carousel.style.transform = `translateX(${scrollPosition}px)`;
+    });
+
+    nextBtn.addEventListener('click', () => {
+        scrollPosition += 320;
+        carousel.style.transform = `translateX(${scrollPosition}px)`;
+    });
+</script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
